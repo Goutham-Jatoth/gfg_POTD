@@ -1,0 +1,21 @@
+class Solution {
+    int levels(Node root) {
+        if(root==null) return 0;
+        return 1 + Math.max(levels(root.left),levels(root.right));
+    }
+    void preorder(Node root, int level, ArrayList<Integer> ans) {
+        if(root==null) return;
+        if(ans.get(level)==-1) ans.set(level,root.data);
+        preorder(root.left,level+1,ans);
+        preorder(root.right,level+1,ans);
+    }
+    ArrayList<Integer> leftView(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = levels(root);
+        for(int i=1;i<=n;i++) {
+            ans.add(-1);
+        }
+        preorder(root,0,ans);
+        return ans;
+    }
+}
