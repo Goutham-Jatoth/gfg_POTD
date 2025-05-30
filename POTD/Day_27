@@ -1,0 +1,19 @@
+class Solution:
+    def findMaxFork(self, root: 'TreeNode', k: int) -> int:
+        """
+        Iteratively finds the greatest value in the BST that is less than or equal to k.
+        Returns -1 if no such value exists.
+        """
+        res = -1
+
+        while root:
+            if root.data <= k:
+                # Current node is a valid candidate; update result
+                res = root.data
+                # Try to find a better (larger but still ≤ k) candidate
+                root = root.right
+            else:
+                # Current node is too large; go left to find smaller values
+                root = root.left
+
+        return res
