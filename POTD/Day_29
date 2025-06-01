@@ -1,0 +1,18 @@
+class Solution:
+    def countPairs(self, mat1, mat2, x):
+        ret=0
+        n=len(mat1)
+        ix2=n*n-1
+        for ix1 in range(n*n):
+            a=mat1[ix1//n][ix1%n]
+            b=mat2[ix2//n][ix2%n]
+            while ix2>=0 and a+b>x:
+                ix2-=1
+                a=mat1[ix1//n][ix1%n]
+                b=mat2[ix2//n][ix2%n]
+            while ix2>=0 and a+b==x:
+                ret+=1
+                ix2-=1
+                a=mat1[ix1//n][ix1%n]
+                b=mat2[ix2//n][ix2%n]
+        return ret
