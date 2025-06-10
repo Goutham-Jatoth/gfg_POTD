@@ -1,0 +1,19 @@
+class Solution:
+   def countStrings(self, s):
+       n=len(s)
+       d={}        #code here
+       for i in s:
+           if i not in d:
+               d[i]=1
+           else:
+               d[i]+=1
+       an=0
+       for i in d.values():
+           if i>1:
+               an+=(i*(i-1))//2
+       
+       ans=(n*(n-1))//2 - an
+       if an>0:
+           ans+=1
+       return ans
+
