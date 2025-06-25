@@ -1,0 +1,18 @@
+ def sameFreq(self, s: str) -> bool:
+        #code here
+        chars = [0]*26
+        for e in s:
+            chars[ord(e)-ord('a')] += 1
+        counts = sorted([e for e in chars if e != 0])
+        #print(counts)
+        
+        if len(counts) <= 1 or counts[0] == counts[-1]:
+            return True
+        
+        if counts[-1] - 1 == counts[-2] and counts[-1] - 1 == counts[0]:
+            return True
+            
+        if counts[0] == 1 and counts[1] == counts[-1]:
+            return True
+
+        return False
