@@ -1,0 +1,12 @@
+  def maxSum(self, arr):
+        # code here
+        s, ans = [], 0
+        for i, e in enumerate(arr):
+            while s and e < s[-1][1]:
+                p, j = s.pop()
+                if j+1 == i:
+                    ans = max(ans, p+e)
+            s.append((e, i))
+            if len(s) >= 2:
+                ans = max(ans, s[-1][0] + s[-2][0])
+        return ans
