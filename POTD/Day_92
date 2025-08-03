@@ -1,0 +1,24 @@
+def applyDiff2D(self, mat, opr):
+        # code here 
+        # algorithm: create command for each row. and create a global command_arr
+        # that will guide add/subtrac value for each column of each row
+        
+        m, n = len(mat), len(mat[0])
+        commands = [[] for _ in range(m+1)]
+        
+        for v, r1, c1, r2, c2 in opr:
+            commands[r1].append((c1, v))
+            commands[r1].append((c2+1, -v))
+            commands[r2+1].append((c1, -v)) # cancel the effect
+            commands[r2+1].append((c2+1, v))  # cancel the effect
+        # for c in commands:
+        #     print(c)
+        command_arr = [0]*(n+1) # global command, will be update each row if need
+        for i, r in enumerate(mat):
+            for c, v in commands[i]:
+                command_arr[c] += v
+            d = 0
+            for c in range(len(r)):
+                d += command_arr[c]
+                r[c] += d
+        return mat
