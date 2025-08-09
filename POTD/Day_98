@@ -1,0 +1,25 @@
+  def getLongestPrefix(self, s):
+        # code here
+        # algorithm: create the lsp table and find the proper prefix length
+        # of the last index lsp[-1]
+        # now we try to find the smallest proper prefix length 
+        
+        n = len(s)
+        lsp = [0]*n
+        for i in range(1, n):
+            j = lsp[i-1]
+            while j > 0 and s[i] != s[j]:
+                j = lsp[j-1]
+            if s[i] == s[j]:
+                j += 1
+            lsp[i] = j
+        j = lsp[-1] # the j characters of last index is the proper prefix,
+                    # then we try to find within this proper prefix if there
+                    # is any prroper prefix
+        r = float('inf')
+        while j > 0:
+            r = min(r, j)
+            j = lsp[j-1]
+        if r == float('inf'):
+            return -1
+        return n-r
