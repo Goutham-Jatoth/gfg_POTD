@@ -1,0 +1,21 @@
+  def maxMinDiff(self, arr, k):
+        arr.sort()
+        
+        def is_possible(diff):
+            picked_count, prev = 0, arr[0] - diff
+            for a in arr:
+                if a - prev >= diff:
+                    picked_count += 1
+                    if picked_count == k:
+                        return True
+                    prev = a
+            return False
+        
+        lo, hi = 0, arr[-1] - arr[0]
+        while lo <= hi:
+            mid = lo + (hi - lo) // 2
+            if is_possible(mid):
+                lo = mid + 1
+            else:
+                hi = mid - 1
+        return hi
