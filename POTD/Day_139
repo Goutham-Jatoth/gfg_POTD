@@ -1,0 +1,11 @@
+ def minParentheses(self, s):
+        to_add = opened = 0
+        for p in s:
+            if p == "(":
+                opened += 1
+            else:
+                if opened == 0:
+                    to_add += 1
+                else:
+                    opened -= 1
+        return to_add + opened
