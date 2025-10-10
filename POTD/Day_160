@@ -1,0 +1,33 @@
+from collections import deque
+
+class Solution:
+    def zigZagTraversal(self, root):
+        # code here
+        
+        count = 0
+        
+        traversal = []
+        
+        q = deque()
+        
+        q.append(root)
+        
+        while(q):
+            qLen  = len(q)
+            temp = []
+            for _ in range(qLen):
+                node = q.popleft()
+                temp.append(node.data)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+
+            if count%2==0:
+                traversal.extend(temp)
+            else:
+                traversal.extend(temp[::-1])
+                
+            count+=1
+        
+        return traversal
