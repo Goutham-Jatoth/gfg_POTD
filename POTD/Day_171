@@ -1,0 +1,4 @@
+from collections import Counter
+class Solution:
+    def topKFreq(self, arr, target):
+        return [-item[1] for item in sorted([(-v, -k) for k, v in Counter(arr).items()])[:target]]
