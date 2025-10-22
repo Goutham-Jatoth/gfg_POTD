@@ -1,0 +1,14 @@
+   def nearlySorted(self, arr, k):
+        from heapq import heapify, heapreplace, heappop
+        if k == 0:
+            return
+        n = len(arr)
+        j = k + 1
+        h = arr[:j]
+        heapify(h)
+        for i in range(n):
+            if j < n:
+                arr[i] = heapreplace(h, arr[j])
+                j += 1
+            else:
+                arr[i] = heappop(h)
