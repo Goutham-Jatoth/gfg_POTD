@@ -1,0 +1,29 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def safeNodes(self, V: int, edges: List[List[int]]) -> List[int]:
+        outdeg = [0] * V
+        adj = [[] for _ in range(V)]
+        
+        # Build reversed graph and outdegree count
+        for u, v in edges:
+            outdeg[u] += 1
+            adj[v].append(u)
+        
+        # Initialize queue with nodes having outdegree 0
+        q = deque([i for i in range(V) if outdeg[i] == 0])
+        is_safe = [False] * V
+        
+        while q:
+            x = q.popleft()
+            is_safe[x] = True
+            
+            for nei in adj[x]:
+                outdeg[nei] -= 1
+                if outdeg[nei] == 0:
+                    q.append(nei)
+        
+        # Collect all safe nodes
+        ans = [i for i in range(V) if is_safe[i]]
+        return ans
