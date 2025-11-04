@@ -1,0 +1,12 @@
+class Solution:
+    def minCost(self, height):
+        lth=len(height)
+        dp=[0]*2
+        for ix in range(lth):
+            mn=0
+            if ix-1>=0:
+                mn=dp[(ix-1)%2]+abs(height[ix]-height[ix-1])
+            if ix-2>=0:
+                mn=min(mn,dp[(ix-2)%2]+abs(height[ix]-height[ix-2]))
+            dp[ix%2]=mn
+        return dp[(lth-1)%2]
