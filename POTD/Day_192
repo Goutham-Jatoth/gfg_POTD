@@ -1,0 +1,19 @@
+ def minSuperSeq(self, s1, s2):
+        # code here
+        from functools import lru_cache
+        
+        m, n = len(s1), len(s2)
+
+        @lru_cache(None)
+        def concate(i, j):
+            if i == m:
+                return len(s2[j:])
+            if j == n:
+                return len(s1[i:])
+            if s1[i] == s2[j]:
+                return 1 + concate(i + 1, j + 1)
+            else:
+                v1 = 1 + concate(i + 1, j)
+                v2 = 1 + concate(i, j + 1)
+                return min(v1, v2)
+        return concate(0, 0)
