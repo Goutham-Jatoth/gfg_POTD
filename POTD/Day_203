@@ -1,0 +1,23 @@
+ def minConnect(self, V, edges):
+        # code here
+        parent = list(range(V))
+        
+        def find(u):
+            nonlocal parent
+            if parent[u] != u:
+                parent[u] = find(parent[u])
+            return parent[u]
+        
+        components = V
+        extra = 0
+        for u, v in edges:
+            r1 = find(u)
+            r2 = find(v)
+            if r1 == r2:
+                extra += 1
+            else:
+                parent[r1] = parent[r2]
+                components -= 1
+        if extra < components-1:
+            return -1
+        return components-1
