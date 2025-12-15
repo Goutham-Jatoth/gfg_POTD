@@ -1,0 +1,21 @@
+class Solution:
+    def cntWays(self, arr):
+        # code here
+        n=len(arr)
+        even,odd=[0]*(n+1),[0]*(n+1)
+        for i in range(1,n+1):
+            if i%2==0:
+                odd[i]=odd[i-1]+arr[i-1]
+                even[i]=even[i-1]
+            else:
+                even[i]=even[i-1]+arr[i-1]
+                odd[i]=odd[i-1]
+        cnt=0
+        for i in range(1,n+1):
+            curr_odd=(odd[i-1]+even[-1]-even[i])
+            curr_even=(even[i-1]+odd[-1]-odd[i])
+            if curr_odd==curr_even:
+                cnt+=1
+        return cnt
+        ''' Time Complexity--O(n)
+            Space Complexity--O(n)'''
