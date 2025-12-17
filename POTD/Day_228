@@ -1,0 +1,16 @@
+class Solution:
+	def mergeOverlap(self, arr):
+		# Code here
+		arr.sort()
+		prev = arr[0]
+		res = []
+		
+		for start, end in arr[1:]:
+		    if start <= prev[1]:
+		        prev[1] = max(prev[1], end)
+		    else:
+		        res.append(prev)
+		        prev = [start, end]
+		    
+		res.append(prev)
+		return res
