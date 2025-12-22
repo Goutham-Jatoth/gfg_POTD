@@ -1,0 +1,4 @@
+def rowWithMax1s(self, arr):
+        from bisect import bisect_right
+        min_zeros, i = min((bisect_right(row, 0), i) for i, row in enumerate(arr))
+        return i if arr[i][-1] != 0 else -1
