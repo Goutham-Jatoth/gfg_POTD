@@ -1,0 +1,38 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Solution:
+    # Helper to reverse the list
+    def rev(self, head):
+        prev = None
+        while head:
+            head.next, prev, head = prev, head, head.next
+        return prev
+
+    def addTwoLists(self, head1, head2):
+        # 1. Reverse lists to add from the end
+        l1, l2 = self.rev(head1), self.rev(head2)
+        
+        curr = None
+        carry = 0
+        
+        # 2. Add digits and build the list backwards
+        while l1 or l2 or carry:
+            val = (l1.data if l1 else 0) + (l2.data if l2 else 0) + carry
+            carry = val // 10
+            
+            # Create new node and link it to the current result
+            newNode = Node(val % 10)
+            newNode.next = curr
+            curr = newNode
+            
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+            
+        # 3. Skip leading zeros
+        while curr and curr.next and curr.data == 0:
+            curr = curr.next
+            
+        return curr
