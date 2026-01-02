@@ -1,0 +1,18 @@
+  def sort012(self, arr):
+        # code here
+        n = len(arr)
+        j, k = 0, n-1 # j mark the start position of 1 and k mark the end position of 1
+        
+        i = 0
+        while i <= k:
+            match arr[i]:
+                case 0:
+                    arr[i], arr[j] = arr[j], arr[i]
+                    j += 1
+                    i += 1
+                case 2:
+                    arr[i], arr[k] = arr[k], arr[i]
+                    k -= 1
+                case _:
+                    i += 1
+        return arr
