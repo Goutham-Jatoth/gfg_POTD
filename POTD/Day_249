@@ -1,0 +1,13 @@
+def countSubarrays(self, arr, k):
+        from collections import deque
+        even_runs = deque([0])
+        arr.append(1)
+        count = 0
+        for a in arr:
+            if a & 1:  # odd
+                if len(even_runs) == k + 1:
+                    count += (even_runs.popleft() + 1) * (even_runs[-1] + 1)
+                even_runs.append(0)
+            else:  # even
+                even_runs[-1] += 1
+        return count
