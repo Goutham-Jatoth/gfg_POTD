@@ -1,0 +1,23 @@
+def minMen(self, arr):
+        #code here 
+        from itertools import chain
+        n = len(arr)
+        covers = sorted([(i-e, i+e) for i, e in enumerate(arr) if e != -1], key = lambda x: x[0], reverse=True)
+        
+        last_pos = -1
+        cnt = 0
+        while covers:
+            next_pos = last_pos
+            while covers and covers[-1][0] <= last_pos+1:
+                next_pos = max(next_pos, covers.pop()[1])
+
+            if next_pos == last_pos:
+                return -1
+                
+            last_pos = next_pos
+
+            cnt += 1
+            if last_pos >= n-1:
+                return cnt
+                
+        return -1
