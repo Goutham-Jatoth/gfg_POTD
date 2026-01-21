@@ -1,0 +1,11 @@
+class Solution:
+    def calculateSpan(self, arr):
+        stk=[]
+        ret=[*range(1,len(arr)+1)]
+        for ix,ve in enumerate(arr):
+            while stk and arr[stk[-1]]<=ve:
+                stk.pop()
+            if stk:
+                ret[ix]=ix-stk[-1]
+            stk.append(ix)
+        return ret
