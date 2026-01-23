@@ -1,0 +1,19 @@
+def maxPeople(self, arr):
+        MAX_HEIGHT = 10**5
+        n = len(arr)
+        max_sight = 0
+        s = [(MAX_HEIGHT + 1, -1)]
+        for i, a in enumerate(arr):
+            while s[-1][0] < a:
+                b, j = s.pop()
+                if (sight := i - s[-1][1] - 1) > max_sight:
+                    max_sight = sight
+            s.append((a, i))
+        for i in range(1, len(s) - 1):
+            start = s[i - 1][1]
+            end = n
+            if s[i][0] == s[i + 1][0]:
+                end = s[i + 1][1]
+            if (sight := end - start - 1) > max_sight:
+                max_sight = sight
+        return max(max_sight, n - s[-2][1] - 1)
