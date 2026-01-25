@@ -1,0 +1,16 @@
+class Solution:
+    def findWays(self, n):
+        # code here
+        # Odd length cannot form valid parentheses
+        if n & 1:
+            return 0
+
+        k = n // 2  # number of pairs
+
+        # Compute binomial coefficient (2k choose k)
+        res = 1
+        for i in range(k):
+            res = res * (2 * k - i) // (i + 1)
+
+        # Catalan number = binomial(2k, k) / (k+1)
+        return res // (k + 1)
