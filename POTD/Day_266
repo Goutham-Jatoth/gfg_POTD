@@ -1,0 +1,15 @@
+def firstNonRepeating(self, s):
+		# code here
+		from collections import defaultdict
+
+		repeated = defaultdict(int)
+		stack, res = [], []
+
+		for e in s:
+		    repeated[e] += 1
+		    stack.append(e)
+		    while stack and repeated[stack[0]] > 1:
+		        stack.pop(0)
+		    res.append(stack[0] if stack else '#')
+		    
+        return "".join(res)
