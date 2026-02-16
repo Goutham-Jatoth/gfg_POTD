@@ -1,0 +1,4 @@
+  def canAttend(self, arr):
+        from itertools import pairwise
+        arr.sort()
+        return all(a[1] <= b[0] for a, b in pairwise(arr))
