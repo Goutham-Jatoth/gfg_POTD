@@ -1,0 +1,26 @@
+ def inversionCount(self, arr):
+        n = len(arr)
+        if n <= 1:
+            return 0
+        low_len = n // 2
+        high_len = n - low_len
+        low = arr[:low_len]
+        high = arr[low_len:]
+        count = self.inversionCount(low) + self.inversionCount(high)
+        i = low_i = high_i = 0
+        while low_i < low_len and high_i < high_len:
+            if low[low_i] <= high[high_i]:
+                arr[i] = low[low_i]
+                low_i += 1
+            else:
+                count += low_len - low_i
+                arr[i] = high[high_i]
+                high_i += 1
+            i += 1
+        for j in range(low_i, low_len):
+            arr[i] = low[j]
+            i += 1
+        for j in range(high_i, high_len):
+            arr[i] = high[j]
+            i += 1
+        return count
