@@ -1,0 +1,21 @@
+class Solution:
+    def longestSubarray(self, arr, k):
+        prefix_sum = 0
+        hash_map = {}
+        max_length = 0
+        for i in range(len(arr)):
+            if arr[i] > k:
+                arr[i]=1
+            else:
+                arr[i]=-1
+        for i in range(len(arr)):
+            prefix_sum += arr[i]
+            
+            if prefix_sum > 0:
+                max_length = i+1
+            if prefix_sum not in hash_map:
+                hash_map[prefix_sum]=i
+            if prefix_sum-1 in hash_map:
+                length = i-hash_map[prefix_sum-1]
+                max_length = max(length, max_length)
+        return max_length
