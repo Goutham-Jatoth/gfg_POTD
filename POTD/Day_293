@@ -1,0 +1,15 @@
+def countSquare(self, mat, x):
+        m, n = len(mat), len(mat[0])
+        sums = [[0]*(n+1) for _ in range(m+1)]
+    
+        for r in range(m):
+            for c in range(n):
+                sums[r+1][c+1] = mat[r][c] + sums[r][c+1] + sums[r+1][c] - sums[r][c]
+    
+        cnt = 0
+        for r in range(m):
+            for c in range(n):
+                for s in range(1, min(m - r, n - c) + 1):
+                    sub = sums[r+s][c+s] - sums[r][c+s] - sums[r+s][c] + sums[r][c]
+                    cnt += int(sub == x)
+        return cnt
