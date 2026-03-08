@@ -1,0 +1,14 @@
+def pythagoreanTriplet(self, arr):
+        squares_set = set(a * a for a in arr)
+        ordered_squares = sorted(squares_set)
+        n = len(ordered_squares)
+        for i in range(n - 2):
+            a2 = ordered_squares[i]
+            for j in range(i + 1, n - 1):
+                b2 = ordered_squares[j]
+                c2 = a2 + b2
+                if c2 in squares_set:
+                    return True
+                elif c2 > ordered_squares[-1]:
+                    break
+        return False
