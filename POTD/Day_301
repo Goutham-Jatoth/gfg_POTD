@@ -1,0 +1,14 @@
+def largestSwap(self, s):
+        n = len(s)
+        ord_9_plus_1 = ord("9") + 1
+        last_i = [-1] * ord_9_plus_1
+        for i in range(1, n):
+            last_i[ord(s[i])] = i
+        for i in range(n - 1):
+            a = ord(s[i])
+            for d in reversed(range(a + 1, ord_9_plus_1)):
+                if (j := last_i[d]) > i:
+                    arr = list(s)
+                    arr[i], arr[j] = arr[j], arr[i]
+                    return "".join(arr)
+        return s
