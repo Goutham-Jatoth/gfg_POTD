@@ -1,0 +1,26 @@
+def generateIp(self, s):
+        n = len(s)
+        
+        def dfs(i: int, k: int, acc: list[str]=[], ans: list[str]=[]) -> list[str]:
+            if i == n:
+                if k == 0:
+                    ans.append(".".join(acc))
+            elif k == 0 or (n - i) / k > 3:
+                pass
+            elif s[i] == "0":
+                acc.append("0")
+                dfs(i + 1, k - 1)
+                acc.pop()
+            else:
+                curr = 0
+                for j in range(i, min(n, i + 3)):
+                    curr = curr * 10 + int(s[j])
+                    if curr > 255:
+                        break
+                    acc.append(s[i:j + 1])
+                    dfs(j + 1, k - 1)
+                    acc.pop()
+            return ans
+        
+        return dfs(0, 4)
+ 
