@@ -1,0 +1,23 @@
+class Solution:
+    def canFinish(self, n, prerequisites):
+        from collections import defaultdict
+        adj=defaultdict(set)
+        for sto,sta in prerequisites:
+            adj[sta].add(sto)
+        seen=set()
+        from functools import cache
+        @cache
+        def dfs(cur):
+            nonlocal seen
+            if cur in seen:
+                return True
+            seen.add(cur)
+            for nxt in adj[cur]:
+                if dfs(nxt):
+                    return True
+            return False
+        for cur in range(n):
+            seen.clear()
+            if dfs(cur):
+                return False
+        return True
