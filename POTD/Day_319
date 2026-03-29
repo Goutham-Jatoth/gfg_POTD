@@ -1,0 +1,28 @@
+class Solution:
+    def countPartitions(self, arr, diff):
+        s = sum(arr)
+        if s < diff:
+            return 0
+            
+        total = (s+diff)
+        if total % 2 != 0:
+            return 0
+            
+        target = total // 2
+        
+        n = len(arr)
+        dp = [[0]*(target+1) for _ in range(n+1)]
+        dp[0][0] = 1
+        
+        for i in range(1, n+1):
+             for j in range(target+1):
+        
+                 not_take = dp[i-1][j]
+                 take = 0
+                 if arr[i-1] <= j:
+                     take = dp[i-1][j-arr[i-1]]
+                
+                 dp[i][j] = take + not_take
+        return dp[n][target]
+        
+
