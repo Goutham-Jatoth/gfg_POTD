@@ -1,0 +1,11 @@
+def totalWays(self, arr, target):
+        reachable = {0: 1}
+        for a in arr:
+            new_reachable = {}
+            for sumi, count in reachable.items():
+                add_a = sumi + a
+                new_reachable[add_a] = new_reachable.get(add_a, 0) + count
+                sub_a = sumi - a
+                new_reachable[sub_a] = new_reachable.get(sub_a, 0) + count
+            reachable = new_reachable
+        return reachable.get(target, 0)
